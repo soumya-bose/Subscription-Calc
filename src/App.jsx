@@ -509,7 +509,7 @@ export default function App() {
       </main>
 
       <footer className="credit">
-        <span>Coded by <a href="https://www.instagram.com/berkindev/" target="_blank" rel="noopener noreferrer">berkindev</a></span>
+        <span>Coded by <a href="https://www.instagram.com/overclocked_dev" target="_blank" rel="noopener noreferrer">Devloped by Soumya @overclocked_dev</a></span>
       </footer>
     </div>
   );
