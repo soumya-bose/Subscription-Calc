@@ -9,7 +9,7 @@ Just accurate expense tracking.
 
 ## Live Demo
 
-https://subscription-calculator-silk.vercel.app/
+https://subscription-calc-gilt.vercel.app/
 
 ---
 
