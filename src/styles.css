@@ -89,48 +89,137 @@ body {
 /* Stats */
 .statsCard {
   padding: 28px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.statsCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), rgba(59, 130, 246, 0));
+  opacity: 0.6;
 }
 
 .statGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 16px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .stat {
   text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  width: 100%;
+}
+
+.stat:hover {
+  transform: translateY(-2px);
 }
 
 .stat.primary {
-  grid-column: span 4;
+  width: 100%;
   padding: 20px 0 24px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   margin-bottom: 8px;
+  position: relative;
+}
+
+.stat.primary::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 20%, rgba(255, 255, 255, 0.3) 50%, transparent 80%);
+  opacity: 0.5;
+}
+
+.stat:not(.primary) {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 16px 12px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  width: 200px; /* Fixed width for consistent sizing */
+  max-width: 250px;
+}
+
+.stat:not(.primary)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), rgba(59, 130, 246, 0));
+  transition: width 0.3s ease;
+  border-radius: 1px;
+}
+
+.stat:not(.primary):hover::before {
+  width: 60%;
 }
 
 .stat.primary .statValue {
   font-size: 42px;
   font-weight: 700;
   letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.8));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
 }
 
 .stat.primary .statLabel {
   font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .statLabel {
   display: block;
   font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 4px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 8px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.stat:not(.primary):hover .statLabel {
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .statValue {
   font-size: 20px;
   font-weight: 600;
   letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.95);
+  transition: all 0.3s ease;
+}
+
+.stat:not(.primary):hover .statValue {
+  color: #ffffff;
+  transform: scale(1.02);
 }
 
 /* Breakdown */
@@ -353,7 +442,7 @@ body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
-  margin-bottom: 20px;
+  margin: 20px 0 20px 0;
 }
 
 .formGroup {
@@ -554,15 +643,16 @@ body {
   }
 
   .statGrid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .stat.primary {
-    grid-column: span 3;
+    gap: 12px;
   }
 
   .stat.primary .statValue {
     font-size: 36px;
+  }
+
+  .stat:not(.primary) {
+    width: 100%;
+    max-width: 100%;
   }
 
   .formGrid {
@@ -588,5 +678,32 @@ body {
     margin-top: 8px;
     padding-top: 8px;
     border-top: 1px solid var(--border);
+  }
+}
+
+.stat-wrapper {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Responsive adjustments for stat-wrapper */
+@media (max-width: 520px) {
+  .stat-wrapper {
+    flex-direction: column;
+    gap: 12px;
+    max-width: 100%;
+  }
+  
+  .statGrid {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .stat:not(.primary) {
+    width: 100%;
+    max-width: none;
   }
 }

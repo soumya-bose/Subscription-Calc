@@ -320,6 +320,7 @@ export default function App() {
               <span className="statLabel">Monthly</span>
               <span className="statValue">{formatCurrency(stats.monthlyTotal)}</span>
             </div>
+            <div className="stat-wrapper">
             <div className="stat">
               <span className="statLabel">Yearly</span>
               <span className="statValue">{formatCurrency(stats.yearlyTotal)}</span>
@@ -331,6 +332,7 @@ export default function App() {
             <div className="stat">
               <span className="statLabel">Active</span>
               <span className="statValue">{stats.count}</span>
+            </div>
             </div>
           </div>
         </div>
